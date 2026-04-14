@@ -1,0 +1,75 @@
+:root{
+  --bg: #0f0f0f;
+  --verde: #9afe6e;
+  --texto: #ffffff;
+  --borda: #2a2a2a;
+  --card-bg: #1a1a1a;
+}
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body{
+  background-color: var(--bg);
+  color: var(--texto);
+  font-family: 'inter', sans-serif;
+}
+
+nav{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 32px;
+  background-color: var(--card-bg);
+  border-bottom: 1px solid var(--borda);
+}
+
+.logo{
+  font-size: 20px;
+  font-weight: 700;
+  color: #00c896;
+}
+
+.nav-links a{
+  color: #aaa;
+  text-decoration: none;
+  margin-left: 24px;
+}
+
+.nav-links a:hover{
+  color: var(--verde);
+}
+
+.btn-novo{
+  background-color: var(--verde);
+  color: var(--bg);
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.rodape-sistema {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 32px;
+  background: #111;
+  border-top: 1px solid #222;
+  font-size: 12px;
+  color: #555;
+}
+
+footer{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 32px;
+  background: #111;
+  border-top: 1px solid #222;
+  font-size: 12px;
+  color: #555;
+}
