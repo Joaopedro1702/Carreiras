@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Dashboard</title>
+
+    <style>
+.titulo-pagina{
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--texto);
+}
+
+.filtros{
+  display: flex;
+  gap: 8px;
+}
+
+.filtro{
+  background: transparent;
+  color: #aaaaaa;
+  border: 1px solid var(--borda);
+  padding: 6px 14px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.filtro:hover{
+  background-color: var(--borda);
+  color: var(--verde);
+}
+
+.board{
+  display: flex;
+  gap: 16px;
+  padding: 24px 32px;
+  overflow-x: auto;
+  height: calc(100vh - 120px);
+}
+
+.coluna{
+  background: var(--card-bg);
+  border-radius: 10px;
+  padding: 16px;
+  min-width: 260px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.col-header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.col-titulo{
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #aaaaaa;
+}
+
+.col-contador{
+  background: var(--borda);
+  color: #aaaaaa;
+  font-size: 12px;
+  padding: 2px 8px;
+  border-radius: 10px;
+}
+
+.card{
+  background: #1e1e1e;
+  border: 1px solid var(--borda);
+  border-radius: 8px;
+  padding: 14px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.card:hover{
+  border-color: var(--verde);
+}
+
+.card-topo{
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.card-vaga{
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--texto);
+}
+
+.card-titulo{
+  font-size: 12px;
+  color: #aaaaaa;
+}
+
+.status{
+  font-size: 11px;
+  color: var(--verde);
+  font-weight: 600;
+}
+
+.card-tags{
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  font-size: 11px;
+  color: #aaaaaa;
+  border-top: 1px solid var(--borda);
+  padding-top: 8px;
+}
+
+.card-rodape {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  color: #aaaaaa;
+  border-top: 1px solid var(--borda);
+  padding-top: 8px;
+}
+
+.modal-overlay{
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0);
+    z-index: 100;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-overlay.ativo{
+    display: flex;
+}
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">Carreiras</div>
+            <div class="nav-links">
+                <a href="#">Dashboard</a>
+                <a href="#">Avaliação</a>
+                <a href="#">Stories</a>
+            </div>
+            <button class="btn-novo" id="btn-novo">+ Nova Vaga</button>
+        </nav>
+    </header>
+
+    <main>
+        <div class="subbar">
+            <span class="titulo-pagina">Dashboard</span>
+            <div class="filtros">
+                <button class="filtro">Todos</button>
+                <button class="filtro">Remoto</button>
+                <button class="filtro">Sênior</button>
+                <button class="filtro">Score A</button>
+            </div>
+        </div>
+
+        <div class="board">
+
+            <div class="coluna">
+                <div class="col-header">
+                    <span class="col-titulo">Avaliando</span>
+                    <span class="contador-avaliando">1</span>
+                </div>
+                <div class="col-cards">
+                    <div class="card">
+                        <div class="card-topo">
+                            <div class="card-vaga">Nome da vaga</div>
+                            <div class="card-titulo">Vaga</div>
+                            <div class="status">status</div>
+                        </div>
+                        <div class="card-tags">Tags</div>
+                        <div class="card-rodape">Rodapé</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="coluna">
+                <div class="col-header">
+                    <span class="col-titulo">Aplicado</span>
+                    <span class="contador-aplicado">2</span>
+                </div>
+                <div class="col-cards">
+                    <div class="card">
+                        <div class="card-topo">
+                            <div class="card-vaga">Nome da vaga</div>
+                            <div class="card-titulo">Vaga</div>
+                            <div class="status">status</div>
+                        </div>
+                        <div class="card-tags">Tags</div>
+                        <div class="card-rodape">Rodapé</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="coluna">
+                <div class="col-header">
+                    <span class="col-titulo">Entrevista</span>
+                    <span class="contador-entrevista">3</span>
+                </div>
+                <div class="col-cards">
+                    <div class="card">
+                        <div class="card-topo">
+                            <div class="card-vaga">Nome da vaga</div>
+                            <div class="card-titulo">Vaga</div>
+                            <div class="status">status</div>
+                        </div>
+                        <div class="card-tags">Tags</div>
+                        <div class="card-rodape">Rodapé</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="coluna">
+                <div class="col-header">
+                    <span class="col-titulo">Oferta</span>
+                    <span class="contador-oferta">4</span>
+                </div>
+                <div class="col-cards">
+                    <div class="card">
+                        <div class="card-topo">
+                            <div class="card-vaga">Nome da vaga</div>
+                            <div class="card-titulo">Vaga</div>
+                            <div class="status">status</div>
+                        </div>
+                        <div class="card-tags">Tags</div>
+                        <div class="card-rodape">Rodapé</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="coluna">
+                <div class="col-header">
+                    <span class="col-titulo">Rejeitado</span>
+                    <span class="contador-rejeitado">5</span>
+                </div>
+                <div class="col-cards">
+                    <div class="card">
+                        <div class="card-topo">
+                            <div class="card-vaga">Nome da vaga</div>
+                            <div class="card-titulo">Vaga</div>
+                            <div class="status">status</div>
+                        </div>
+                        <div class="card-tags">Tags</div>
+                        <div class="card-rodape">Rodapé</div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+<footer>
+    <span class="footer-texto">Carreiras © 2026</span>
+    <span class="footer-versao">v1.0.0</span>
+</footer>
+
+<div class="modal-overlay" id="modal">
+    <div class="modal-conteudo">
+        <button class="modal-fechar" id="modal-fechar">x</button>
+        <div id="modal-corpo"></div>
+    </div>
+</div>
+
+<script>
+    const VAGAS = [
+    {
+        id:1,
+        empresa: "Google",
+        cargo: "Dev Frontend",
+        status: "Avaliando",
+        score: "A",
+        match: 85,
+        remoto: true,
+        data: "10 abr"
+    },
+    {
+        id:2,
+        empresa: "Facebook",
+        cargo: "Dev Backend",
+        status: "Entrevista",
+        score: "B",
+        match: 10,
+        remoto: true,
+        data: "15 abr"
+    },
+    {
+        id:3,
+        empresa: "Amazon",
+        cargo: "Dev Fullstack",
+        status: "Aplicado",
+        score: "A",
+        match: 85,
+        remoto: true,
+        data: "20 abr"
+    }
+    ]
+
+function carregarVagas(){
+    const colunas = document.querySelectorAll('.coluna');
+
+    colunas.forEach(coluna => {
+        const status = coluna.querySelector('.col-titulo').textContent
+        const VagasFiltradas = VAGAS.filter(VAGA=> VAGA.status === status)
+        const containerCards = coluna.querySelector('.col-cards')
+
+        containerCards.innerHTML = ''
+
+        VagasFiltradas.forEach(vaga => {
+                const card = document.createElement('div')
+                card.classList.add('card')
+
+                card.dataset.id = vaga.id
+                card.addEventListener('click', () => abrirModal(vaga.id))
+    
+                card.innerHTML = `
+                    <div class="card-topo">
+                        <div class="card-vaga">${vaga.empresa}</div>
+                        <div class="card-titulo">${vaga.cargo}</div>
+                        <div class="status">${vaga.status}</div>
+                    </div>
+                    <div class="card-tags">Score: ${vaga.score} | Match: ${vaga.match}% | ${vaga.remoto ? 'Remoto' : 'Presencial'}</div>
+
+                    <div class="card-rodape">${vaga.data}</div>
+                `
+                containerCards.appendChild(card)
+        })
+    })
+}
+
+function abrirModal(id){
+    const vaga = VAGAS.find(v => v.id === id)
+    document.getElementById('modal-corpo').innerHTML = `
+        <h2>${vaga.empresa}</h2>
+        <p>${vaga.cargo}</p>
+        <p>Score: ${vaga.score}</p>
+        <p>Match: ${vaga.match}%</p>
+        <p>Data: ${vaga.data}</p>        
+        `
+        document.getElementById('modal').classList.add('ativo')
+}
+
+document.getElementById('modal-fechar').addEventListener('click', () => {
+    document.getElementById('modal').classList.remove('ativo')
+})
+
+document.getElementById('modal').addEventListener('click', (e) => {
+    if(e.target === document.getElementById('modal')){
+        document.getElementById('modal').classList.remove('ativo')
+    }
+})
+
+function contador(){
+    const coluna = document.querySelector('#coluna-avaliando .col-cards')
+    const contador = document.querySelector('#coluna-avaliando .col-contador')
+
+    contador.textContent = coluna.querySelectorAll('.card').length /*retorna quantos elementos foram encontrados*/
+}
+carregarVagas()
+</script>
+</body>
+</html>

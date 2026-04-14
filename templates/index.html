@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Avaliador de vagas</title>
+
+        <style>
+        body{
+            font-family:'Times New Roman', Times, serif;
+            background-color:black;
+            min-height: 100vh;
+            justify-content: center;
+            align-items: center;
+        }
+
+        header{
+            padding: 5px;
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+        }
+
+        header h1{
+            color: palegreen;
+        }
+
+        .avaliacao{
+            background-color:rgb(205, 206, 201);
+            height: 400px;
+            width: 700px;
+            margin: 0 auto;
+            overflow-y: auto;
+            max-height: 400px;
+        }
+
+        .avaliacao h2{
+            color: green;
+            text-align: center;
+        }
+
+        textarea{
+            width: 500px;
+            margin: 0 auto;
+            display: block;
+            flex-direction: column;
+            margin: 50px;
+            padding: 20px;
+            font-size: 16px;
+            border-radius: 25px;
+            background-color: rgb(221, 255, 0);
+            color:black;
+        }
+
+        .avaliar{
+            display: flex;
+            flex-direction: column;
+            margin: 10px;
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 25px;
+            background-color: rgb(2, 212, 37);
+            color: rgb(0, 0, 0);
+            border-width: none;
+        }
+
+        .avaliar:hover{
+            background-color: yellow;
+            
+        }
+        .avaliacaoarea{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+
+
+    </style>
+</head>
+<body>
+    <header>
+        <h1>CareerOps</h1>
+    </header>
+
+    <article class="avaliacao" id="avaliacao">
+        <h2>Avaliação de capacidade para vaga</h2>
+        <output class="avaliacaoia" for="vaga"></output>
+    </article>
+    <div class="avaliacaoarea">
+        <textarea name="vaga" id="vaga" placeholder="Coloque a descrição da vaga..."></textarea>
+        <button class="avaliar" id="avaliar">Avaliar</button>
+    </div>
+    
+    <script>
+        const botao = document.getElementById('avaliar');
+        const vagainput = document.getElementById('vaga');
+        const resultado = document.querySelector('.avaliacaoia');
+
+
+        let readerAtual = null
+
+        botao.addEventListener("click", function(){
+            const vaga = vagainput.value;
+            if (readerAtual) {
+                readerAtual.cancel()
+            }
+            resultado.textContent = ""
+            fetch("/avaliar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ vaga: vaga })
+        })
+        .then(response => {
+            console.log("status:", response.status)
+    const reader = response.body.getReader()
+    readerAtual = reader
+    const decoder = new TextDecoder()
+
+    function ler() {
+        reader.read().then(({ done, value }) => {
+            if (done) return
+            resultado.textContent += decoder.decode(value)
+            ler()
+        })
+    }
+    ler()
+})
+})
+
+vagainput.addEventListener("keydown", function(){
+        if (event.key === "Enter" && !event.shiftKey) {
+            event.preventDefault();
+            botao.click();
+        }
+
+})
+
+    </script>
+
+</body>
+</html>
