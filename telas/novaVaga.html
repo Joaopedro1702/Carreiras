@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Nova Vaga</title>
+</head>
+<body>
+    <body>
+    <header>
+        <nav>
+            <div class="logo">Carreiras</div>
+            <div class="nav-links">
+                <a href="telaDashboard.html">Dashboard</a>
+                <a href="#">Avaliação</a>
+                <a href="#">Stories</a>
+            </div>
+            <button class="btn-novo" id="btn-novo">+ Nova Vaga</button>
+        </nav>
+    </header>
+    <!--Cadastro de vagas-->
+    <h1>Cadastrar Vaga</h1>
+    <p class="subtitulo">Preencha todos os dados para cadastrar a sua vaga.</p>
+
+    <form id="form" novalidate>
+        <div class="field" id="field-nome">
+            <label for="nome">Nome</label>
+            <input type="text" id="nome" placeholder="Digite o nome da empresa" autocomplete="given-name">
+            <span class="error-msg">Campo obrigatório.</span>
+        </div>
+
+        <div class="field" id="field-descricao">
+            <label for="descricao">Descrição da vaga</label>
+            <input type="text" id="descricao" placeholder="Adicione a descrição da vaga aqui.">
+            <span class="error-msg">Campo obrigatório.</span>
+        </div>
+
+        <section class="selecao">
+            <label for="selecao">Situação da vaga:</label>
+            <select name="situacaovaga" id="situacaovaga">
+                <option value="avaliando">Avaliando</option>
+                <option value="aplicado">Aplicado</option>
+                <option value="entrevista">Entrevista</option>
+                <option value="oferta">Oferta</option>
+                <option value="rejeitado">Rejeitado</option>
+            </select>
+        </section>
+    </form>
+</body>
+</html>

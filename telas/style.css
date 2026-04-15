@@ -106,3 +106,13 @@ footer{
 .modal-fechar:hover {
   color: var(--verde);
 }
+
+.coluna{
+  height: 230px;
+
+}
+
+.coluna:hover{
+  transform: scale(1.05);
+  z-index: 10;
+}
